@@ -6,13 +6,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-
-
-<cfif NOT IsUserLoggedIn()>
-
-<cflocation url="../Regular-Users/cfm/index.cfm"
-			addToken ="No">
-<cfelse>
+<!--- <cfoutput>#GetUserRoles()#</cfoutput> --->
 
 
 <!DOCTYPE html>
@@ -26,9 +20,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../Components/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../Components/css/flexslider.css" type="text/css" media="screen" />
 
 
 <!-- js -->
@@ -124,8 +118,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/bootstrap.js"></script>
-    <script src="js/logout_validation.js"></script>
+    <script src="../Components/js/logout.js"></script>
 </body>
 </html>
-</cfif>
-<!--- </cfif> --->

@@ -15,10 +15,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../Components/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" media="all">
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../Components/css/flexslider.css" type="text/css" media="screen" />
 
 
 <!-- js -->
@@ -39,6 +39,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--//end-smooth-scrolling-->
 </head>
 <body>
+	<cfset id = #getAuthUser()# >
+	<cfset getID=application.doctor.getID(id)>
+	<cfset getdata=application.doctor.getData(#getID.doctorID#)>
 	<!--header-->
 	<div class="header">
 		<nav class="navbar navbar-default">
@@ -47,24 +50,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h1><a href="adminHomePage.cfm"><img src="images/logo.png" alt="">We Care</a></h1>
 				</div>
 				<!--navigation-->
-				<div class="header-text navbar-left">
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting<p>
-				</div>
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div class="header-right">
+
+					<div class="header-right">
 					<div class="top-nav-text">
 
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-left">
-							<li ><a onclick="logout()" class="link link--yaku" ><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a></li>
-
+							<li  ><a  class="link link--yaku" href="cfm/myprofile.cfm"><span>MY</span><span>-</span><span>PR</span><span>OF</span><span>IL</span><span>E</span></a></li>
+							<li  ><a  class="link link--yaku" onclick="Logout()"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a></li>
+							<li  ><a  class="link link--yaku" href="cfm/changePassword.cfm" ><span>CH</span><span>AN</span><span>GE</span><span>-</span><span>PA</span><span>SS</span><span>WO</span><span>RD</span></a></li>
 						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -74,8 +70,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</nav>
 	</div>
 	<!--//header-->
-
-	<cfset getdata=application.getDataTable.getData()>
+					<div class="doctorName">
+						<cfoutput>
+						<h3><span class="labelDoctor">WELCOME -</span> #getID.doctorname#</h3>
+						<input type="hidden" value="#getID.doctorID#" id="docID">
+						</cfoutput>
+					</div>
 
     <table id="dataTable" class="table table-bordered table-striped Doctortable" >
         <thead>
@@ -85,8 +85,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <th>Name</th>
                 <th>Disease</th>
                 <th>Admitted Date</th>
+				<th>Estimated Discharge Date</th>
                 <th>Status</th>
-                <th>Associated Doctor</th>
+				<th>Status Change</th>
+				<th>Associated Doctor</th>
 
 
             </tr>
@@ -101,25 +103,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfset next = #PatientID# >
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
-							<tr class ="clickToEdit" data-href="editPatient.cfm" value="#PatientID#">
-								<td>#PatientID#</td>
+						<cfif #status# EQ 'DISCHARGED'>
+							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit warning"
+										data-href="editPatient.cfm" value="#PatientID#">
+						<cfelseif #status# EQ 'READY TO DISCHARGE'>
+							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit success"
+										data-href="editPatient.cfm" value="#PatientID#">
+						<cfelse>
+							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit"
+										data-href="editPatient.cfm" value="#PatientID#">
+						</cfif>
+								<td>PID-#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
 								<td>#disease#</td>
 				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
+				                <td>#dateFormat(estimatedDischargeDate,"dd-mm-yyyy")#</td>
 				                <td>#status#</td>
+				                <td class="statusChange">
+					                 <cfif #status# NEQ 'Discharged' AND #status# NEQ 'READY TO DISCHARGE'>
+						                 <a class="btn btn-sm btn-warning">
+							                 <span class="glyphicon glyphicon-pencil"  onclick="statusChange(#PatientID#)">
+											 </span>
+										 </a>
+									 </cfif>
+								</td>
 				                <td>  <cfset nameDoctor = "">
 									  <cfloop query="getdata">
 
-										  <cfif #PatientID# EQ #ID#>
+										  <cfif #PatientID# EQ #ID# AND #DoctorID# NEQ #getID.doctorid#>
 
 										  	<cfset nameDoctor = #DoctorName# & " <br> " & #nameDoctor#>
-
 										  </cfif>
 
 									  </cfloop>
 								 	  #nameDoctor#
 									  <cfset prev= next>
-					</cfif> </td>
+								</cfif>		 </td>
 
 				</tr>
 		</cfloop>
@@ -132,6 +151,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</tbody>
 
     </table>
+
 
 
 
@@ -155,9 +175,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
-    <script src="../js/bootstrap.js"></script>
-	<script src="../js/logout_validation.js"></script>
+    <script src="js/bootstrap.js"></script>
+	 <script src="../Components/js/logout.js"></script>
+	<script src="js/profile.js"></script>
+	<script src="js/statusChange.js"></script>
+	<script src="js/changePassword.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
 
 
 </body>

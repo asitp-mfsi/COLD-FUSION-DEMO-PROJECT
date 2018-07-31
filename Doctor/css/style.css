@@ -53,6 +53,19 @@ margin-top:50px;
 
 width:80%;
 }
+.doctorName
+{
+	width:50%;
+}
+.doctorName h1
+{
+	color:black;
+}
+.labelDoctor
+{
+	color:red;
+}
+
 .header {
     margin: 2em 0 0;
     border-bottom: 5px solid #C7C2C2;
@@ -2799,12 +2812,25 @@ color:red;
 	width:48%;
 	float:left;
 }
+.float-left-first-8 label
+{
+	color:black;
+}
 .float-right-second-8
 {
 	width:48%;
 	float:right;
 }
-
+.float-right-second-8 label
+{
+	color:black;
+}
+.info
+{
+	font-size:20px;
+	color:blue;
+	text-transform: uppercase;
+}
 .associateddoctors
 {
 	margin-left:auto;
@@ -2813,7 +2839,25 @@ color:red;
 	width:70%;
 
 }
-
+.profileDetails h1
+{
+	color:red;
+	text-decoration:underline;
+}
+.dataTables_length
+{
+	display:none;
+}
+.dataTables_filter
+{
+	float:right;
+	margin-right: 130px;
+}
+#dataTable_paginate , .dataTables_info
+{
+	float:right;
+	margin-right: 130px;
+}
 
 .signup__thumbnail {
   position: relative;
@@ -2886,13 +2930,11 @@ h2 {
     margin-right: auto;
     margin-left: auto;
 }
-.loginForm
+.changePassword
 {
-	margin-top:40%;
-	background-color:white;
-	opacity:0.6;
-	border-radius:20px;
-	padding:20px;
+	margin-right:auto;
+	margin-left:auto;
+	width:50%;
 }
 
 label {

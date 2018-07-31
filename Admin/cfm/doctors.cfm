@@ -5,11 +5,8 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-<cfif NOT IsUserLoggedIn()>
 
-  <cflocation url="../../Regular-Users/cfm/index.cfm"
-			addToken ="No">
-<cfelse>
+
 
 <!DOCTYPE html>
 <html>
@@ -22,9 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
+<cfinclude template = "css.cfm">
 
 
 <!-- js -->
@@ -72,12 +67,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li ><a href="../adminHomePage.cfm"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li ><a href="patients.cfm" class="link link--yaku" ><span>P</span><span>A</span><span>T</span><span>I</span><span>E</span><span>N</span><span>T</span><span>S</span></a>
 							<li class="active"><a href="doctors.cfm" ><span>D</span><span>O</span><span>C</span><span>T</span><span>O</span><span>R</span><span>S</span></a></li>
-							<li><a href="#" class="dropdown-toggle link link--yaku" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>A</span><span>D</span><span>D</span></a>
-								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="addPatients.cfm">add new patient</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="addDoctors.cfm">add new doctor</a></li>
-								</ul>
-							</li>
 						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -90,6 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
    <!--- Show data of doctors in data table --->
 	<cfset getdata=application.dataManipulation.getDoctorData()>
+	<div id="showDataTable">
 	<table id="dataTable" class="table table-bordered table-striped Doctortable" >
         <thead>
             <tr class="info">
@@ -103,7 +93,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<tbody>
 
 			<cfoutput query="getdata">
-			<tr>
+			<tr onclick="getDoctors(#doctorId#)">
 
 				<td>DOC-MFSI-#doctorID#</td>
                 <td>#firstName# <cfif #middleName# NEQ 'NULL' > #middleName# </cfif> #lastName# </td>
@@ -114,8 +104,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</tbody>
 
     </table>
+	</div>
 
-
+	<div id="editForm">
+		<cfinclude template="editDoctor.cfm">
+	</div>
 
 
 	<!--copy-right-->
@@ -134,19 +127,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/doctor.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
+
+	<script src="../js/getDoctor.js"></script>
+	<script src="../js/validation.js"></script>
+
 
 
 </body>
 </html>
 
-</cfif>

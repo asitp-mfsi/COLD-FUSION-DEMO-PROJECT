@@ -15,9 +15,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../../Components/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="../css/lightbox.css">
+<link rel="stylesheet" href="../../Components/css/lightbox.css">
 <!-- js -->
 <script src="../js/jquery-1.11.1.min.js"></script>
 <!-- //js -->
@@ -39,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<div class="navbar-header navbar-left">
-					<h1><a href="../index.cfm"><img src="../images/logo.png" alt="">We Care</a></h1>
+					<h1><a href="index.cfm"><img src="../images/logo.png" alt="">We Care</a></h1>
 				</div>
 				<!--navigation-->
 				<div class="header-text navbar-left">
@@ -61,9 +61,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li class="active"><a href="index.cfm" class="link link--yaku"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li ><a href="gallery.cfm" class="link link--yaku"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span></a></li>
 							<li><a href="contact.cfm" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-							<li class="login link link--yaku" data-toggle="modal" data-target="#myModal" ><a href="#"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span></a></li>
+
+							<cfif NOT IsUserLoggedIn()>
 								<li class="sign link link--yaku"><a href="registration.cfm"><span>S</span><span>I</span><span>G</span><span>N</span><span> U</span><span>P</span></a></li>
-						</ul>
+								<li class="login link link--yaku" data-toggle="modal" data-target="#myModal" ><a href="#"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span></a></li>
+							<cfelse>
+								<li><a class="link link--yaku" onclick ="Logout()"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a></li>
+							</cfif>
+
+							<cfif #GetUserRoles()# EQ 'admin'>
+								<li><a class="link link--yaku" href='../../Admin/adminHomePage.cfm'><span>A</span><span>D</span><span>M</span><span>I</span><span>N</span></a></li>
+
+							<cfelseif #GetUserRoles()# EQ 'doctor'>
+								<li><a class="link link--yaku" href='../../Doctor/doctorHomePage.cfm'><span>D</span><span>O</span><span>C</span><span>T</span><span>O</span><span>R</span></a></li>
+
+							</cfif>
+							</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
 				</div>
@@ -149,6 +162,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/loginValidation.js"></script>
+	<script src="../js/logout.js"></script>
 </body>
 </html>
 

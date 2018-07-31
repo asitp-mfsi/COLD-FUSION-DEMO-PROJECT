@@ -5,11 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-<cfif NOT IsUserLoggedIn()>
 
-	<cflocation url="../../Regular-Users/cfm/index.cfm"
-			addToken ="No">
-<cfelse>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
+<cfinclude template = "css.cfm">
 
 
 <!-- js -->
@@ -95,11 +89,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
   <!--- Form to add new Doctor --->
   <div class="container__child signup__form">
-    <form action="addDoctorGateway.cfm" class="registration_form" method="post" onsubmit="return check_Signup_Validation()">
+    <form action="doctors.cfm" class="registration_form" method="post" onsubmit="return checkDoctorsValidation('create')">
 		<div class="float-left-first-8">
 			<div class="form-group">
 		        <label for="firstName">First Name</label>
-		        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="james" required />
+		        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="" required />
 		    </div>
 			<div class="form-group">
        			 <label for="middleName">Middle Name</label>
@@ -107,16 +101,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      	    </div>
 			<div class="form-group">
 			     <label for="lastName">Last Name</label>
-			     <input class="form-control" type="text" name="lastName" id="lastName" placeholder="bond" required />
+			     <input class="form-control" type="text" name="lastName" id="lastName" placeholder="" required />
 			</div>
 			<div class="form-group">
        			 <label for="dob">DOB</label>
-        		 <input class="form-control" type="date" name="dob" id="dob" required />
+        		 <input class="form-control" type="date" name="dob" id="dob" onblur="dobvalidate(this.id)" required />
      	    </div>
 			<div class="form-group">
        			 <label for="gender">Gender</label>
 				 <br>
-		         <select class="form-control" name="gender">
+		         <select class="form-control" name="gender" id="gender">
 		  			<option value="male" >Male</option>
 		 			 <option value="female" >Female</option>
 		  			<option value="other" >Other</option>
@@ -128,7 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		      </div>
 					<div class="form-group">
 		        <label for="joiningdate">Joining Date</label>
-		        <input class="form-control" type="date" name="joiningdate" id="joiningdate" required />
+		        <input class="form-control" type="date" name="joiningdate" id="joiningdate" onblur="dobvalidate(this.id)" required />
 		      </div>
 
 
@@ -219,8 +213,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
     <script src="../js/bootstrap.js"></script>
-	<script src="../js/signupvalidation.js"></script>
+	<script src="../js/validation.js"></script>
 </body>
 </html>
 
-</cfif>

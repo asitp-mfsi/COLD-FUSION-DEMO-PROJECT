@@ -6,11 +6,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-<cfif NOT IsUserLoggedIn()>
 
-	<cflocation url="../../Regular-Users/cfm/index.cfm"
-			addToken ="No">
-<cfelse>
 
 <!DOCTYPE html>
 <html>
@@ -23,9 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
+<cfinclude template = "css.cfm">
 
 
 <!-- js -->
@@ -112,13 +106,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfset next = #PatientID# >
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
-							<tr class ="clickToEdit" data-href="editPatient.cfm" value="#PatientID#">
+							<tr  data-href="editPatient.cfm" value="#PatientID#">
 								<td>#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
 								<td>#disease#</td>
 				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
 				                <td>#status#</td>
-				                <td class="statusChange"><a class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
+				                <td class="statusChange" onclick="statusChange(#PatientID#)"><a class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
 				            	<td>  <cfset nameDoctor = "">
 									  <cfloop query="getdata">
 
@@ -171,12 +165,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="../js/bootstrap.js"></script>
-	<script src="../js/readyToDischargePatient.js"></script>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
+	<script src="../js/readyToDischargePatient.js"></script>
 </body>
 </html>
- </cfif>

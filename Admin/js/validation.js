@@ -1,7 +1,5 @@
 $(document).ready(function()
 	{
-			
-			
 			$.validator.addMethod("notEqualToZero",function(value,element)
 			{
 				return this.optional(element)
@@ -122,13 +120,29 @@ $(document).ready(function()
 
 
 });
+function dobvalidate(id)
+{
+   var dob=$("#"+id).val();
+   var today=new Date();
+   var day=Date.parse(dob);
+   if(today<=day || isNaN(day)){
+
+	$("#"+id).css({"borderColor":"red"});
+	checkOnSubmit=false;
+
+	}
+	else
+		$("#"+id).css({"borderColor":"white"});	
+
+}
 
 
 
-function check_Signup_Validation()
+function check_Signup_Validation(toDo)
 {
 	var validator = $(".registration_form").valid();
 	var selectedValues = [];
+	var functionality = toDo;
 	 $.each($("#associatedDoctor option:selected"), function(){            
 		 selectedValues.push($(this).val());
      });
@@ -149,6 +163,7 @@ function check_Signup_Validation()
 		var state=$("#state").val();
 		var country=$("#country").val();
 		var zip=$("#zip").val();
+		var id=$("#id").val();
 		var datarecord=false;
 		if(validator==true && email!=""){
 		 $.ajax({
@@ -171,7 +186,9 @@ function check_Signup_Validation()
 					 state : state,
 					 country : country,
 					 zip : zip,
-					 selectedValues : selectedValues.join()
+					 selectedValues : selectedValues.join(),
+					 id : id,
+					 functionality : functionality
 				 },
 				 dataType: "json",
 				 type:"POST",
@@ -196,8 +213,85 @@ function check_Signup_Validation()
 		else
 		{
 			return false;
-		}
-	
-	
+		}	
 	
 }
+
+function checkDoctorsValidation(toDo)
+{
+	var validator = $(".registration_form").valid();
+	var functionality = toDo;
+	 
+	 	var email=$("#email").val();
+		var firstName=$("#firstName").val();
+		var middleName=$("#middleName").val();
+		var lastName=$("#lastName").val();
+		var gender=$("#gender option:selected").val();
+		var dob=$("#dob").val();
+		var specialization=$("#specialization").val();
+		var joiningdate=$("#joiningdate").val();
+		var mobile=$("#mobile").val();
+		var mobileAlternate=$("#mobilealternate").val();
+		var password=$("#password").val();
+		var yearsOfExperience=$("#yearsOfExperience").val();
+		var line1=$("#line1").val();
+		var line2=$("#line2").val();
+		var city=$("#city").val();
+		var state=$("#state").val();
+		var country=$("#country").val();
+		var zip=$("#zip").val();
+		var id=$("#id").val();
+		var datarecord=false;
+		if(validator==true && email!=""){
+		 $.ajax({
+			 url:"../cfc/admin.cfc",
+				 data: {
+					 method : "checkValidity",
+					 email : email,
+					 firstName : firstName,
+					 middleName : middleName,
+					 lastName : lastName,
+					 specialization : specialization,
+					 joiningdate : joiningdate,
+					 gender : gender,
+					 dob : dob,
+					 mobile : mobile,
+					 password : password,
+					 yearsOfExperience : yearsOfExperience,
+					 mobileAlternate : mobileAlternate,
+					 line1 : line1,
+					 line2 : line2,
+					 city : city,
+					 state : state,
+					 country : country,
+					 zip : zip,
+					 id : id,
+					 functionality : functionality
+				 },
+				 dataType: "json",
+				 type:"POST",
+					 success: function(data){
+						 datarecord=data;
+						 if(data==false)
+						 {
+						 	$(".theErrorDivID").html("**Email ID already exists / contact admin ");
+						 }
+						 else
+						 {
+							 $(".theErrorDivID").html("");
+							 window.open('../cfm/doctors.cfm','_self');
+						 }
+					 },
+					 error: function(data){
+						 	$(".theErrorDivID").html("Error Occured");
+					 }
+		});
+		 	return (validator===datarecord);
+		}
+		else
+		{
+			return false;
+		}	
+	
+}
+

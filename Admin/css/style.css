@@ -47,11 +47,31 @@ body a:hover{
 
 .Doctortable
 {
-margin:auto auto;
 margin-top:50px;
-
-
+margin:auto auto;
 width:80%;
+}
+.dataTables_filter
+{
+
+	float:right;
+	margin-right: 130px;
+}
+#dataTable_paginate , .dataTables_info
+{
+	float:right;
+	margin-right: 130px;
+}
+.buttons-pdf
+{
+	color: blue;
+    background-color: black;
+    width: 100px;
+    height: 50px;
+}
+.col-sm-12
+{
+	text-transform:uppercase;
 }
 
 #associatedDoctor
@@ -155,6 +175,7 @@ nav.navbar.navbar-default {
 	transition: transform 0.5s;
 }
 
+
 .link--yaku:hover::before {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
@@ -222,6 +243,10 @@ ul.dropdown-menu li {
     top: 171%;
     border-top: 5px solid #CC2127;
 	padding: 0;
+}
+.dataTables_length
+{
+	display:none;
 }
 /*--//drop-down--*/
 .header-text {

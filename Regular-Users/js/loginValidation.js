@@ -1,7 +1,20 @@
+
+
+
+$(document).ready(function() {
+	$("#myModal").trigger("reset");
+});
+
+
+
+
 function onSubmitForm()
 {
 	var emailLogin=$("#usernameLogin").val();
 	var passwordLogin=$("#passwordLogin").val();
+	var user=$("#users :selected").val();
+	
+	console.log(user=="admin");
 
 	$.ajax({
 		 url:"../cfc/User.cfc",
@@ -9,6 +22,7 @@ function onSubmitForm()
 				 method : "checkLoginCreadentials",
 				 email : emailLogin,
 				 password : passwordLogin,
+				 user : user,
 				 },
 			 dataType: "json",
 			 type:"POST",
@@ -17,11 +31,15 @@ function onSubmitForm()
 					 $(".theErrorDivID").html("**Username or password is incorrect / You may be already logged in");
 					 return false;
 					 }
-					 else
+					 else if(user == "admin")
 						 {
 						 $(".theErrorDivID").html("");
 						 window.open("../../Admin/adminHomePage.cfm","_self")
-						 return true;
+						 }
+					 else
+						 {
+						 $(".theErrorDivID").html("");
+						 window.open("../../Doctor/doctorHomePage.cfm","_self")
 						 }
 					 },
 					 error:function(data){

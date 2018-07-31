@@ -15,9 +15,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	Smartphone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Custom Theme files -->
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="../../Components/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-<link rel="stylesheet" href="../css/lightbox.css">
+<link rel="stylesheet" href="../../Components/css/lightbox.css">
 <!-- js -->
 <script src="../js/jquery-1.11.1.min.js"></script>
 <!-- //js -->
@@ -61,8 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li><a href="index.cfm" class="link link--yaku"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li class="active"><a href="gallery.cfm" ><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span></a></li>
 							<li><a href="contact.cfm" class="link link--yaku"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-							<li class="login link link--yaku" data-toggle="modal" data-target="#myModal" ><a href="#"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span></a></li>
-								<li class="sign link link--yaku"><a href="registration.cfm"><span>S</span><span>I</span><span>G</span><span>N</span><span> U</span><span>P</span></a></li>
+							<li class="sign link link--yaku"><a href="registration.cfm"><span>S</span><span>I</span><span>G</span><span>N</span><span> U</span><span>P</span></a></li>
 						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -72,7 +71,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</nav>
 	</div>
 
-<cfinclude template="loginModal.cfm">
 
 
 

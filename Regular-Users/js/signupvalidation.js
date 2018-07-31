@@ -176,7 +176,7 @@ function check_Signup_Validation()
 					 else
 					 {
 						 $(".theErrorDivID").html("");
-						 window.open('../index.cfm','_self');
+						 window.open('../cfm/index.cfm','_self');
 					 }
 				 },
 				 error: function(data){

@@ -1,7 +1,9 @@
+
+
 function Logout()
 {
 	$.ajax({
-		 url:"cfc/NewCFComponent.cfc",
+		 url:"../../Components/cfc/error.cfc",
 			 data: {
 				 method : "logout",
 				 },
@@ -10,8 +12,13 @@ function Logout()
 			 type:"POST",
 				 success: function(data){
 
-						 window.open('../Regular-Users/index.cfm','_self');
-					 }
+						 window.open('../../Regular-Users/cfm/index.cfm','_self');
+					 },
+				 error: function(data){
+					 	return false;
+				 }
 					 });
 	return false;
 }
+
+
