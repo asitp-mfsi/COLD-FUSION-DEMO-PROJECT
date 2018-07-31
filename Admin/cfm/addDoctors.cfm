@@ -5,7 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
+<cfif NOT IsUserLoggedIn()>
 
+	<cflocation url="../../Regular-Users/cfm/index.cfm"
+			addToken ="No">
+<cfelse>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,11 +95,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
   <!--- Form to add new Doctor --->
   <div class="container__child signup__form">
-    <form action="doctors.cfm" class="registration_form" method="post" onsubmit="return checkDoctorsValidation('create')">
+    <form action="addDoctorGateway.cfm" class="registration_form" method="post" onsubmit="return check_Signup_Validation()">
 		<div class="float-left-first-8">
 			<div class="form-group">
 		        <label for="firstName">First Name</label>
-		        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="" required />
+		        <input class="form-control" type="text" name="firstName" id="firstName" placeholder="james" required />
 		    </div>
 			<div class="form-group">
        			 <label for="middleName">Middle Name</label>
@@ -103,16 +107,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      	    </div>
 			<div class="form-group">
 			     <label for="lastName">Last Name</label>
-			     <input class="form-control" type="text" name="lastName" id="lastName" placeholder="" required />
+			     <input class="form-control" type="text" name="lastName" id="lastName" placeholder="bond" required />
 			</div>
 			<div class="form-group">
        			 <label for="dob">DOB</label>
-        		 <input class="form-control" type="date" name="dob" id="dob" onblur="dobvalidate(this.id)" required />
+        		 <input class="form-control" type="date" name="dob" id="dob" required />
      	    </div>
 			<div class="form-group">
        			 <label for="gender">Gender</label>
 				 <br>
-		         <select class="form-control" name="gender" id="gender">
+		         <select class="form-control" name="gender">
 		  			<option value="male" >Male</option>
 		 			 <option value="female" >Female</option>
 		  			<option value="other" >Other</option>
@@ -124,7 +128,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		      </div>
 					<div class="form-group">
 		        <label for="joiningdate">Joining Date</label>
-		        <input class="form-control" type="date" name="joiningdate" id="joiningdate" onblur="dobvalidate(this.id)" required />
+		        <input class="form-control" type="date" name="joiningdate" id="joiningdate" required />
 		      </div>
 
 
@@ -215,7 +219,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
     <script src="../js/bootstrap.js"></script>
-	<script src="../js/validation.js"></script>
+	<script src="../js/signupvalidation.js"></script>
 </body>
 </html>
 
+</cfif>

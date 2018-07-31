@@ -7,6 +7,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
+<cfif NOT IsUserLoggedIn()>
+
+	<cflocation url="../../Regular-Users/cfm/index.cfm"
+			addToken ="No">
+<cfelse>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //Custom Theme files -->
 <link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="../css/style.css" type="text/css" rel="stylesheet" media="all">
-
+<link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen" />
 
 
 
@@ -69,6 +74,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li ><a href="../adminHomePage.cfm"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li class="active"><a href="patients.cfm" ><span>P</span><span>A</span><span>T</span><span>I</span><span>E</span><span>N</span><span>T</span><span>S</span></a>
 							<li><a href="doctors.cfm" class="link link--yaku"><span>D</span><span>O</span><span>C</span><span>T</span><span>O</span><span>R</span><span>S</span></a></li>
+							<li><a href="#" class="dropdown-toggle link link--yaku" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span>A</span><span>D</span><span>D</span></a>
+								<ul class="dropdown-menu">
+									<li><a class="hvr-bounce-to-bottom" href="addPatients.cfm">add new patient</a></li>
+									<li><a class="hvr-bounce-to-bottom" href="addDoctors.cfm">add new doctor</a></li>
+								</ul>
+							</li>
 						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -83,8 +94,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!--- patients data --->
 	<cfset getdata=application.dataManipulation.getData()>
 
-	<div id="showDataTable">
-
 	<table id="dataTable" class="table table-bordered table-striped Doctortable" >
         <thead>
             <tr class="info">
@@ -93,7 +102,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <th>Name</th>
                 <th>Disease</th>
                 <th>Admitted Date</th>
-				<th>Est. Discharge Date</th>
                 <th>Status</th>
                 <th>Associated Doctor</th>
             </tr>
@@ -108,22 +116,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfset next = #PatientID# >
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
-						<cfif #status# EQ 'DISCHARGED'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit warning"
-										data-href="editPatient.cfm" value="#PatientID#">
-						<cfelseif #status# EQ 'READY TO DISCHARGE'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit success"
-										data-href="editPatient.cfm" value="#PatientID#">
-						<cfelse>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit"
-										data-href="editPatient.cfm" value="#PatientID#">
-						</cfif>
-								<td>PID-#PATIENTID#</td>
+							<tr class ="clickToEdit" data-href="editPatient.cfm" value="#PatientID#">
+								<td>#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
-								<td>#DISEASE#</td>
-				                <td>#dateFormat(ADMITTEDDATE,"dd-mm-yyyy")#</td>
-				                <td> #dateFormat(ESTIMATEDDISCHARGEDATE,"dd-mm-yyyy")# </td>
-				                <td>#STATUS#</td>
+								<td>#disease#</td>
+				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
+				                <td>#status#</td>
 				                <td>  <cfset nameDoctor = "">
 									  <cfloop query="getdata">
 
@@ -146,11 +144,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     </table>
 
-	</div>
 
-	<div id="editForm">
-	<cfinclude template="editPatient.cfm">
-	</div>
+
 
 	<!--copy-right-->
 	<div class="copy-right">
@@ -171,25 +166,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <script src="../js/bootstrap.js"></script>
     <script src="../js/getPatients.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
-
-	<script src="../js/validation.js"></script>
-
-
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-	<link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
-
 
 
 </body>
 </html>
+
+</cfif>

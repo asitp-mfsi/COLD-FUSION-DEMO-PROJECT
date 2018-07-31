@@ -6,7 +6,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
+<cfif NOT IsUserLoggedIn()>
 
+	<cflocation url="../../Regular-Users/cfm/index.cfm"
+			addToken ="No">
+<cfelse>
 
 <!DOCTYPE html>
 <html>
@@ -108,13 +112,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfset next = #PatientID# >
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
-							<tr  data-href="editPatient.cfm" value="#PatientID#">
+							<tr class ="clickToEdit" data-href="editPatient.cfm" value="#PatientID#">
 								<td>#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
 								<td>#disease#</td>
 				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
 				                <td>#status#</td>
-				                <td class="statusChange" onclick="statusChange(#PatientID#)"><a class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
+				                <td class="statusChange"><a class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></a></td>
 				            	<td>  <cfset nameDoctor = "">
 									  <cfloop query="getdata">
 
@@ -175,3 +179,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 </body>
 </html>
+ </cfif>

@@ -5,7 +5,11 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
+<cfif NOT IsUserLoggedIn()>
 
+	<cflocation url="../../Regular-Users/cfm/index.cfm"
+			addToken ="No">
+<cfelse>
 
 <!DOCTYPE html>
 <html>
@@ -91,7 +95,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
   <!--- Form to add new Patient --->
   <div class="container__child signup__form">
-    <form action="" class="registration_form" method="post" onsubmit="return check_Signup_Validation('create')">
+    <form action="" class="registration_form" method="post" onsubmit="return check_Signup_Validation()">
 		<div class="float-left-first-8">
 				<div class="form-group">
 		        <label for="firstName">First Name</label>
@@ -107,7 +111,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		      </div>
 				<div class="form-group">
 		        <label for="dob">DOB</label>
-		        <input class="form-control" type="date" name="dob" id="dob" onblur="dobvalidate(this.id)" required />
+		        <input class="form-control" type="date" name="dob" id="dob" required />
 		      </div>
 				<div class="form-group">
 		        <label for="gender">Gender</label>
@@ -124,7 +128,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		      </div>
 				<div class="form-group">
 		        <label for="admittedDate">Admitted Date</label>
-		        <input class="form-control" type="date" name="admittedDate" id="admittedDate" onblur="dobvalidate(this.id)" required />
+		        <input class="form-control" type="date" name="admittedDate" id="admittedDate" required />
 		      </div>
 
 
@@ -226,6 +230,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
     <script src="../js/bootstrap.js"></script>
-	<script src="../js/validation.js"></script>
+	<script src="../js/patients.js"></script>
 </body>
 </html>
+
+</cfif>

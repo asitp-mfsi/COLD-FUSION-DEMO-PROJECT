@@ -6,13 +6,14 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-<!--- <cfoutput>#GetUserRoles()#</cfoutput> --->
+
 
 <cfif NOT IsUserLoggedIn()>
 
 <cflocation url="../Regular-Users/cfm/index.cfm"
 			addToken ="No">
 <cfelse>
+
 
 <!DOCTYPE html>
 <html>

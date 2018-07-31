@@ -62,7 +62,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<li><a href="index.cfm" class="link link--yaku"><span>H</span><span>O</span><span>M</span><span>E</span></a></li>
 							<li><a href="gallery.cfm" class="link link--yaku"><span>G</span><span>A</span><span>L</span><span>L</span><span>E</span><span>R</span><span>Y</span><span></span></a></li>
 							<li class="active "><a href="contact.cfm"><span>C</span><span>O</span><span>N</span><span>T</span><span>A</span><span>C</span><span>T</span> <span>U</span><span>S</span></a></li>
-							<li class="sign link link--yaku"><a href="Registration.cfm"><span>S</span><span>I</span><span>G</span><span>N</span><span> U</span><span>P</span></a></li>
+							<li class="login link link--yaku" data-toggle="modal" data-target="#myModal" ><a href="#"><span>L</span><span>O</span><span>G</span><span>I</span><span>N</span></a></li>
+								<li class="sign link link--yaku"><a href="Registration.cfm"><span>S</span><span>I</span><span>G</span><span>N</span><span> U</span><span>P</span></a></li>
 						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
@@ -72,6 +73,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</nav>
 	</div>
 
+<cfinclude template="loginModal.cfm">
 
   <!--//header-->
 	<div class="banner about-bnr">

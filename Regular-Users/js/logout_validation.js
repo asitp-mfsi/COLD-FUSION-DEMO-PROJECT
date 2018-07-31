@@ -1,8 +1,7 @@
 function Logout()
 {
-	console.log("user access");
 	$.ajax({
-		 url:"../../Components/cfc/error.cfc",
+		 url:"NewCFComponent.cfc",
 			 data: {
 				 method : "logout",
 				 },
@@ -11,7 +10,7 @@ function Logout()
 			 type:"POST",
 				 success: function(data){
 
-						 window.open('../cfm/index.cfm','_self');
+						 window.open('login.cfm','_self');
 					 }
 					 });
 	return false;

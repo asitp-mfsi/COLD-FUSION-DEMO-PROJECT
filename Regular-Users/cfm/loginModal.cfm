@@ -7,7 +7,7 @@
 
 			  <div class="form-group">
 				  <div class="form-icon">
-				  		 <img src="../images/user.jpg" id="form-icon-id">
+				  		 <img src="../images/username.png" id="form-icon-id">
 		        		<label for="user">USER</label>
 		        	</div>
 		        			<select class="form-control" name="users" id="users">
@@ -22,7 +22,7 @@
 				      <img src="../images/username.png" id="form-icon-id">
 				      <label for="username"> Username</label>
 				  </div>
-				        <input class="form-control" type="text" name="username" id="usernameLogin" placeholder="" value="" required />
+				        <input class="form-control" type="text" name="username" id="usernameLogin" placeholder="james@bond1" required />
 			  </div>
 			  <div class="theErrorDivID"></div>
 
@@ -31,7 +31,7 @@
 					      <img src="../images/password.png" id="form-icon-id">
 					       <label for="password">Password</label>
 					 </div>
-					        <input class="form-control" type="password" name="password" id="passwordLogin" value="" placeholder="********" required />
+					        <input class="form-control" type="password" name="password" id="passwordLogin" placeholder="********" required />
 			  </div>
 			  <div id="loginbutton">
 					 <input class="btn btn--form loginFormButton" type="submit"   value="Login" />

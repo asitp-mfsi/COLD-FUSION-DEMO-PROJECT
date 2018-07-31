@@ -63,10 +63,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-left">
-							<li  ><a  class="link link--yaku" ><span>MY</span><span>-</span><span>PR</span><span>OF</span><span>IL</span><span>E</span></a></li>
-							<li  ><a  class="link link--yaku" onclick="Logout()"><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a></li>
-														<!--- <li  ><a  class="link link--yaku" data-toggle="modal" data-target="#myModal" ><a href="#"><span>CH</span><span>AN</span><span>GE</span><span>-</span><span>PA</span><span>SS</span><span>WO</span><span>RD</span></a></li>
-						 ---></ul>
+							<li ><a onclick="logout()" class="link link--yaku" ><span>L</span><span>O</span><span>G</span><span>O</span><span>U</span><span>T</span></a></li>
+
+						</ul>
 						<div class="clearfix"> </div>
 					</div><!--//navigation-->
 				</div>
@@ -76,11 +75,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!--//header-->
 
-	<cfset id = #getAuthUser()# >
-
-	<cfset getID=application.doctor.getID(id)>
-
-	<cfset getdata=application.doctor.getData(#getID#)>
+	<cfset getdata=application.getDataTable.getData()>
 
     <table id="dataTable" class="table table-bordered table-striped Doctortable" >
         <thead>
@@ -90,10 +85,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <th>Name</th>
                 <th>Disease</th>
                 <th>Admitted Date</th>
-				<th>Estimated Discharge Date</th>
                 <th>Status</th>
-				<th>Status Change</th>
-				<th>Associated Doctor</th>
+                <th>Associated Doctor</th>
 
 
             </tr>
@@ -108,42 +101,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfset next = #PatientID# >
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
-						<cfif #status# EQ 'DISCHARGED'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit warning"
-										data-href="editPatient.cfm" value="#PatientID#">
-						<cfelseif #status# EQ 'READY TO DISCHARGE'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit success"
-										data-href="editPatient.cfm" value="#PatientID#">
-						<cfelse>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit"
-										data-href="editPatient.cfm" value="#PatientID#">
-						</cfif>
+							<tr class ="clickToEdit" data-href="editPatient.cfm" value="#PatientID#">
 								<td>#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
 								<td>#disease#</td>
 				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
-				                <td></td>
 				                <td>#status#</td>
-				                <td class="statusChange">
-					                 <cfif #status# NEQ 'Discharged' AND #status# NEQ 'READY TO DISCHARGE'>
-						                 <a class="btn btn-sm btn-warning">
-							                 <span class="glyphicon glyphicon-pencil"  onclick="statusChange(#PatientID#)">
-											 </span>
-										 </a>
-									 </cfif>
-								</td>
 				                <td>  <cfset nameDoctor = "">
 									  <cfloop query="getdata">
 
-										  <cfif #PatientID# EQ #ID# AND #DoctorID# NEQ #getID#>
+										  <cfif #PatientID# EQ #ID#>
 
 										  	<cfset nameDoctor = #DoctorName# & " <br> " & #nameDoctor#>
+
 										  </cfif>
 
 									  </cfloop>
 								 	  #nameDoctor#
 									  <cfset prev= next>
-								</cfif>		 </td>
+					</cfif> </td>
 
 				</tr>
 		</cfloop>
@@ -156,8 +132,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</tbody>
 
     </table>
-
-	<cfinclude template="cfm/changePassword.cfm">
 
 
 
@@ -181,8 +155,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
-    <script src="js/bootstrap.js"></script>
-	<script src="js/logout.js"></script>
+    <script src="../js/bootstrap.js"></script>
+	<script src="../js/logout_validation.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 
