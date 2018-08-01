@@ -24,6 +24,7 @@
 				<cfreturn "#getDoctor#" />
 
 				<cfcatch>
+					<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
 				</cfcatch>
 			</cftry>
 
@@ -105,12 +106,12 @@
 			</cfquery>
 			<cfreturn details />
 			<cfcatch>
-				<p>Error</p>
+				<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
 			</cfcatch>
 		</cftry>
 	</cffunction>
 
-
+	<!--- password Change --->
 	<cffunction name="changePassword" output="false" access="remote" returnType="string" returnFormat="json">
 		<cfargument name="oldPassword" type="string" required="true">
 		<cfargument name="newPassword" type="string" required="true">
@@ -150,7 +151,7 @@
 			<cfreturn false />
 
 			<cfcatch>
-
+					<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
 			</cfcatch>
 		</cftry>
 

@@ -79,7 +79,7 @@
 			</cfif>
 				<cfreturn #local.returnValue# />
 			<cfcatch>
-				<cfset logerror=application.errorHMS.logError('#cfcatch.Type#','"#cfcatch.cause.message#"')>
+				<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
 			</cfcatch>
 
 
@@ -199,7 +199,7 @@
 					<cfreturn #local.returnValue# />
 				<cfcatch>
 
-					<cfset logerror=application.errorHMS.logError('#cfcatch.Type#','"#cfcatch.cause.message#"')>
+					<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
 
 				</cfcatch>
 
@@ -208,4 +208,84 @@
 	</cffunction>
 
 
+	<cffunction name="sendLink" output = "false" access="remote" returnType="boolean" returnFormat="json">
+
+		<cfargument name="username" type="string" required="true">
+
+		<cftry>
+
+			<cfquery name="getID">
+
+				SELECT [doctorID] ,
+					 CONCAT( [Doctor].[doctorInformation].[firstName], ' ',[Doctor].[doctorInformation].[middleName],' ',[Doctor].[doctorInformation].[lastName])
+					 AS DoctorName
+					 FROM [Doctor].[doctorInformation]
+					 WHERE
+					 [Doctor].[doctorInformation].[emailID]	= <cfqueryparam value="#arguments.username#" cfsqltype="cf_sql_varchar">
+			</cfquery>
+
+
+
+			<cfif #getID.recordCount#>
+
+
+				<cfmail from="asit.asu096@gmail.com" to="#username#" subject="Password Recovery" type="text">
+					Hi #getID.DoctorName#,
+						Click on this Link "http://localhost:82/Components/cfm/forgotPassword.cfm" Change Password</a>.
+						Your link will be invalid in 24hours.
+
+					Thank you.
+
+				</cfmail>
+
+				<cfquery name="getDetails">
+					SELECT [doctorID]
+						   FROM
+						   [dbo].[forgotPassword]
+						   WHERE
+						   [doctorID] = <cfqueryparam value="#getID.doctorID#" cfsqltype="cf_sql_integer">
+
+				</cfquery>
+
+				<cfif #getDetails.recordCount#>
+						<cfquery name="setDate">
+
+							UPDATE [dbo].[forgotPassword]
+						    	   SET
+						           [accessDate] = <cfqueryparam value="#now()#" cfsqltype="cf_sql_timestamp">
+						           WHERE
+						           [doctorID] = <cfqueryparam value="#getID.doctorID#" cfsqltype="cf_sql_integer">
+
+							</cfquery>
+
+						<cfelse>
+
+
+							<cfquery name="setDate">
+
+							INSERT INTO [dbo].[forgotPassword]
+						           ([doctorID]
+						           ,[accessDate])
+						    	   VALUES
+						           (<cfqueryparam value="#getID.doctorID#" cfsqltype="cf_sql_integer">
+						           ,<cfqueryparam value="#now()#" cfsqltype="cf_sql_timestamp">)
+
+						</cfquery>
+
+
+				</cfif>
+
+				<cfreturn true>
+
+			</cfif>
+
+				<cfreturn false>
+
+			<cfcatch>
+				<cfset logerror=application.errorHMS.logError('#cfcatch.Type#')>
+			</cfcatch>
+
+		</cftry>
+
+	</cffunction>
 </cfcomponent>

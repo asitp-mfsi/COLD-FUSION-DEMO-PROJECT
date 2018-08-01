@@ -2884,8 +2884,9 @@ label {
 }
 #loginbutton
 {
-	margin-right:40%;
-	margin-left:40%;
+	margin-right:auto;
+	margin-left:auto;
+	width:50%;
 	display:block;
 }
 .loginFormButton

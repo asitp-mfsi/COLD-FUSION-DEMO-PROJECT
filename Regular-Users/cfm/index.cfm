@@ -87,6 +87,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <cfinclude template="loginModal.cfm">
 
+<cfinclude template="forgotpassword.cfm">
+
 
 
 		<!--banner-->
@@ -163,6 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="../js/bootstrap.js"></script>
     <script src="../js/loginValidation.js"></script>
 	<script src="../js/logout.js"></script>
+	<script src="../js/sendLink.js"></script>
 </body>
 </html>
 

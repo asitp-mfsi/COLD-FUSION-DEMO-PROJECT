@@ -36,8 +36,10 @@
 			  <div id="loginbutton">
 					 <input class="btn btn--form loginFormButton" type="submit"   value="Login" />
 			  </div>
+			  <a data-toggle="modal"   data-target="#forgotPasswordModal" data-dismiss="modal">Forgot Password</a>
 
 		       </div>
+
 	      </form>
       </div>
     </div>

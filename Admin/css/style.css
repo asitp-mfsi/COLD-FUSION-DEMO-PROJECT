@@ -64,10 +64,11 @@ width:80%;
 }
 .buttons-pdf
 {
-	color: blue;
+	color: white;
     background-color: black;
     width: 100px;
     height: 50px;
+    bottom-radius:10px;
 }
 .col-sm-12
 {
