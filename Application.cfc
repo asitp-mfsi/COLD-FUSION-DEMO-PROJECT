@@ -7,7 +7,7 @@
   --->
 <cfcomponent  output="false" >
 
-<cfset This.name="CFProject106">
+<cfset This.name="CFProject110">
 <cfset This.sessionManagement="Yes">
 <cfset This.clientmanagement="Yes" >
 <cfset This.sessiontimeout=#CreateTimeSpan(0,0,20,0)#>
@@ -29,7 +29,7 @@
 
 		        <cfreturn true />
 		    <cfcatch>
-			<cfreturn false />
+				<cfreturn false />
 			</cfcatch>
 			</cftry>
     </cffunction>
@@ -82,21 +82,19 @@
 			</cfif>
 
 		<cfcatch>
+				<cfreturn false/>
 		</cfcatch>
 		</cftry>
 
 </cffunction>
 
-
-
-
-	<!--- <cffunction
+	<cffunction
 			name="onError">
 			<cfargument name="Exception" required=true/>
 			<cfargument name="EventName" type="String" required=true/>
 		<cftry>
 			<cflog type="Error"
-				file="error"
+				file="HMSError"
 				text="Exception error --
 				   	  Exception type: #error.type#
 					  Template: #error.template#,
@@ -107,7 +105,7 @@
 			<cfcatch>
 			</cfcatch>
 		</cftry>
-	</cffunction> --->
+	</cffunction>
 
 
 </cfcomponent>
