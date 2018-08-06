@@ -104,20 +104,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<cfif next NEQ prev>
 						<cfset ID=#PatientID#>
 						<cfif #status# EQ 'DISCHARGED'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit warning"
-										data-href="editPatient.cfm" value="#PatientID#">
+							<tr  class ="warning" value="#PatientID#">
 						<cfelseif #status# EQ 'READY TO DISCHARGE'>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit success"
-										data-href="editPatient.cfm" value="#PatientID#">
+							<tr  class ="success" value="#PatientID#">
 						<cfelse>
-							<tr onclick="getPatient(#PatientID#)" class ="clickToEdit"
-										data-href="editPatient.cfm" value="#PatientID#">
+							<tr  value="#PatientID#">
 						</cfif>
 								<td>PID-#PatientID#</td>
 				                <td>#PATIENTNAME#</td>
 								<td>#disease#</td>
-				                <td>#dateFormat(admittedDate,"dd-mm-yyyy")#</td>
-				                <td>#dateFormat(estimatedDischargeDate,"dd-mm-yyyy")#</td>
+				                <td>#dateFormat(admittedDate,"dd-mmm-yyyy")#</td>
+				                <td>#dateFormat(estimatedDischargeDate,"dd-mmm-yyyy")#</td>
 				                <td>#status#</td>
 				                <td class="statusChange">
 					                 <cfif #status# NEQ 'Discharged' AND #status# NEQ 'READY TO DISCHARGE'>
@@ -177,14 +174,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
     <script src="js/bootstrap.js"></script>
 	 <script src="../Components/js/logout.js"></script>
-	<script src="js/profile.js"></script>
 	<script src="js/statusChange.js"></script>
-	<script src="js/changePassword.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<link href="https://cdn.datatables.net/plug-ins/1.10.19/sorting/date-dd-MMM-yyyy.js"/>
 
 
 

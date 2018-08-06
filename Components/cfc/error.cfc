@@ -26,9 +26,10 @@
 
 		<!--- change patients status --->
 
-		<cffunction name="changeStatus" output="false" access="remote" returnType="string" >
+		<cffunction name="changeStatus" output="true" access="remote" returnType="string" >
 			<cfargument name="id" type="string" required="true">
 			<cftry>
+
 					<cfset patientId = numberFormat(id)>
 
 					<cfquery name="status">
@@ -39,7 +40,7 @@
 							 				  <cfelse>
 							 				  	 <cfqueryparam value="3" CFSQLType='CF_SQL_INTEGER'> ,
 							 				  </cfif>
-							 [estimatedDischargeDate] =<cfqueryparam value="#DateFormat(Now())#" CFSQLType='CF_SQL_DATE'>,
+							 [estimatedDischargeDate] =<cfqueryparam value="#DateFormat(Now())#" CFSQLType='CF_SQL_DATE'>
 							 WHERE [PatientID] = <cfqueryparam value="#patientId#" CFSQLType='CF_SQL_INTEGER'>
 					</cfquery>
 					<cfreturn true>

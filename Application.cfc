@@ -13,6 +13,7 @@
 <cfset This.sessiontimeout=#CreateTimeSpan(0,0,20,0)#>
 <cfset this.datasource="CFDataSource">
 
+	<!--- onApplicationStart() --->
 	<cffunction
 	        name="OnApplicationStart"
 	        returntype="boolean">
@@ -34,7 +35,7 @@
 			</cftry>
     </cffunction>
 
-
+    <!--- onMissingTemplate() --->
 	<cffunction
 			name="onMissingTemplate">
 		<cfargument name="targetPage" type="string" required=true/>
@@ -56,6 +57,7 @@
 		</cftry>
 	</cffunction>
 
+	<!--- onRequestStart() --->
 	<cffunction
 			name="onRequestStart">
 		<cfargument name="requestname" required=true/>
@@ -88,6 +90,7 @@
 
 </cffunction>
 
+    <!--- onError() --->
 	<cffunction
 			name="onError">
 			<cfargument name="Exception" required=true/>

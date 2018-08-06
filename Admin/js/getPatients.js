@@ -8,7 +8,10 @@ $(document).ready(function() {
                 orientation: 'landscape',
                 pageSize: 'LEGAL'
             }
-        ]
+        ],
+    	columnDefs: [
+        { type: 'date-dd-mmm-yyyy', targets: 0 }
+      ]
     } );
     
     $("#editForm").hide();
